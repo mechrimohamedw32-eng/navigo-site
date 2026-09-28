@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+<meta name="google-site-verification" content="34_e9JrHxvOdHzS_UIzAm2m_7Wd6Uf1U51KCYzXf5v0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigo - دليل المواقع الشامل والأدوات المفيدة</title>
+    <meta name="description" content="دليلك الشامل لأفضل المواقع المفيدة، أدوات الذكاء الاصطناعي، الكورسات، الربح من الإنترنت، والتطبيقات التعليمية.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Cairo & Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' },
+                        accent: { 500: '#6366f1', 600: '#4f46e5' },
+                        darkbg: '#0f172a',
+                        darkcard: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Cairo', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', 'Inter', sans-serif; }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .light .glassmorphism {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col transition-colors duration-300 light:bg-slate-50 light:text-slate-800" id="bodyApp">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 light:bg-white/90 backdrop-blur-md border-b border-slate-800 light:border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="filterCategory('all')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-extrabold bg-gradient-to-r from-primary-500 via-accent-500 to-teal-400 bg-clip-text text-transparent">
+                        NAVIGO
+                    </span>
+                </div>
+
+                <!-- Controls & Language Selector -->
+                <div class="flex items-center gap-3">
+                    <!-- Language Dropdown -->
+                    <select id="langSelector" onchange="changeLanguage(this.value)" class="bg-slate-800 light:bg-slate-100 text-slate-200 light:text-slate-700 text-sm rounded-lg px-3 py-1.5 border border-slate-700 light:border-slate-300 focus:outline-none focus:border-primary-500">
+                        <option value="ar">العربية (AR)</option>
+                        <option value="en">English (EN)</option>
+                        <option value="fr">Français (FR)</option>
+                    </select>
+
+                    <!-- Dark/Light Toggle -->
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-800 light:bg-slate-100 text-slate-300 light:text-slate-600 hover:text-primary-500 transition">
+                        <i id="themeIcon" class="fas font-solid fa-moon text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Announcement / Top Ad Banner Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-4">
+        <div class="p-3 bg-gradient-to-r from-primary-900/40 to-accent-900/40 border border-primary-500/30 rounded-xl flex items-center justify-between text-xs sm:text-sm text-center">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider">[إعلان / AD]</span>
+            <span class="text-slate-200 font-medium" id="adTextTop">مساحة إعلانية ممتازة للرعاة ورابط موقعك هنا! تواصل معنا للإعلان.</span>
+            <a href="mailto:contact@navigo.com" class="px-3 py-1 bg-primary-600 text-white rounded-md text-xs hover:bg-primary-500 transition">إعلن معنا</a>
+        </div>
+    </div>
+
+    <!-- Main Hero Section -->
+    <section class="py-8 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 light:from-slate-900 light:to-slate-600 bg-clip-text text-transparent" id="heroTitle">
+            بوابتك الشاملة لكل المواقع والأدوات المفيدة على الويب
+        </h1>
+        <p class="text-slate-400 light:text-slate-600 text-base sm:text-lg mb-6" id="heroSubtitle">
+            تصفح أكثر من 150 موقعاً مختاراً بعناية للذكاء الاصطناعي، العمل الحُر، الدراسة، والتسلية في مكان واحد.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="relative max-w-2xl mx-auto mb-8">
+            <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+            <input type="text" id="searchInput" oninput="handleSearch()" placeholder="إبحث عن أي موقع أو أداة (مثال: ChatGPT, Canva, Coursera...)" 
+                class="w-full pl-4 pr-12 py-3.5 bg-slate-800/80 light:bg-white text-slate-100 light:text-slate-800 rounded-2xl border border-slate-700 light:border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-xl transition text-sm sm:text-base">
+        </div>
+
+        <!-- Category Tags Scrollable -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar justify-start sm:justify-center" id="categoryButtons">
+            <!-- Dynamic Category Buttons injected by JS -->
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex-grow w-full">
+        <!-- Results Count & Active Category Header -->
+        <div class="flex justify-between items-center mb-6 border-b border-slate-800 light:border-slate-200 pb-3">
+            <h2 class="text-xl font-bold flex items-center gap-2 text-primary-400" id="currentCategoryTitle">
+                <i class="fas fa-th-large"></i> كل التصنيفات
+            </h2>
+            <span class="text-xs text-slate-400 bg-slate-800 light:bg-slate-200 px-3 py-1 rounded-full" id="sitesCount">150+ موقع</span>
+        </div>
+
+        <!-- Links Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="linksContainer">
+            <!-- Dynamic Link Cards Injected Here -->
+        </div>
+
+        <!-- Sponsored Banner inside Content Grid -->
+        <div class="my-10 p-6 bg-slate-800/50 light:bg-slate-100 rounded-2xl border border-dashed border-slate-700 light:border-slate-300 text-center">
+            <span class="text-xs text-primary-500 font-bold uppercase tracking-widest block mb-1">Google AdSense Space / إعلان</span>
+            <p class="text-slate-400 text-sm">إعلان مخصص بناءً على اهتمامات الزائر (يمكن وضع كود الإعلانات هنا)</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 light:bg-slate-100 border-t border-slate-800 light:border-slate-200 py-8 mt-12 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-3">
+                <div class="w-6 h-6 rounded-md bg-primary-600 flex items-center justify-center text-white text-xs font-bold">N</div>
+                <span class="text-sm font-bold text-slate-300 light:text-slate-700">Navigo Directory</span>
+            </div>
+            <p class="mb-3" id="footerText">جميع الحقوق محفوظة © 2026 - دليل المواقع والأدوات المفيدة Navigo.</p>
+            <div class="flex justify-center gap-4 text-slate-400">
+                <a href="#" class="hover:text-primary-400">سياسة الخصوصية</a>
+                <span>•</span>
+                <a href="#" class="hover:text-primary-400">اتصل بنا</a>
+                <span>•</span>
+                <a href="#" class="hover:text-primary-400">إضافة موقعك</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Engine -->
+    <script>
+        // Database of 10 Categories with 15 Links Each = 150 Links
+        const categories = [
+            { id: 'ai', name: 'ذكاء اصطناعي', icon: 'fa-robot' },
+            { id: 'office', name: 'أدوات مكتبية', icon: 'fa-file-pdf' },
+            { id: 'courses', name: 'كورسات وتعلم', icon: 'fa-graduation-cap' },
+            { id: 'editing', name: 'مونتاج وتعديل', icon: 'fa-video' },
+            { id: 'earning', name: 'الربح من النت', icon: 'fa-dollar-sign' },
+            { id: 'cooking', name: 'وصفات أكل', icon: 'fa-utensils' },
+            { id: 'sports', name: 'رياضة ومباريات', icon: 'fa-futbol' },
+            { id: 'student', name: 'خدمات الطلاب', icon: 'fa-book-open' },
+            { id: 'tech', name: 'مراجعة الأجهزة', icon: 'fa-laptop' },
+            { id: 'social', name: 'دردشة وتواصل', icon: 'fa-comments' }
+        ];
+
+        const linksData = [
+            // 1. الذكاء الاصطناعي (15)
+            { cat: 'ai', title: 'ChatGPT', url: 'https://chat.openai.com', desc: 'أشهر نموذج شات ذكي للإجابة عن الأسئلة بكفاءة عالية.', icon: 'https://www.google.com/s2/favicons?domain=openai.com&sz=64' },
+            { cat: 'ai', title: 'Claude AI', url: 'https://claude.ai', desc: 'مساعد ذكي قوي وممتاز للتحليل والمقالات الطويلة.', icon: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=64' },
+            { cat: 'ai', title: 'Midjourney', url: 'https://midjourney.com', desc: 'أفضل أداة توليد صور واقعية وفنية عالية الجودة.', icon: 'https://www.google.com/s2/favicons?domain=midjourney.com&sz=64' },
+            { cat: 'ai', title: 'Perplexity AI', url: 'https://perplexity.ai', desc: 'محرك بحث ذكي يقدم إجابات دقيقة مع المصادر.', icon: 'https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64' },
+            { cat: 'ai', title: 'Leonardo.Ai', url: 'https://leonardo.ai', desc: 'توليد الصور وتصاميم ألعاب بجودة خيالية مجاناً.', icon: 'https://www.google.com/s2/favicons?domain=leonardo.ai&sz=64' },
+            { cat: 'ai', title: 'RunwayML', url: 'https://runwayml.com', desc: 'توليد وتعديل مقاطع الفيديو بالذكاء الاصطناعي.', icon: 'https://www.google.com/s2/favicons?domain=runwayml.com&sz=64' },
+            { cat: 'ai', title: 'Sora OpenAI', url: 'https://sora.com', desc: 'صناعة فيديوهات احترافية واقعية للغاية من النص.', icon: 'https://www.google.com/s2/favicons?domain=openai.com&sz=64' },
+            { cat: 'ai', title: 'ElevenLabs', url: 'https://elevenlabs.io', desc: 'تحويل النص إلى صوت بشري واقعي بمختلف اللغات.', icon: 'https://www.google.com/s2/favicons?domain=elevenlabs.io&sz=64' },
+            { cat: 'ai', title: 'Gamma App', url: 'https://gamma.app', desc: 'إنشاء عروض تقديمية ومستندات في ثوانٍ بالذكاء الاصطناعي.', icon: 'https://www.google.com/s2/favicons?domain=gamma.app&sz=64' },
+            { cat: 'ai', title: 'Canva AI', url: 'https://canva.com', desc: 'أدوات تصميم سحرية وتعديل الصور وتوليد الفن.', icon: 'https://www.google.com/s2/favicons?domain=canva.com&sz=64' },
+            { cat: 'ai', title: 'Pika Labs', url: 'https://pika.art', desc: 'تحويل الصور والترجمة إلى فيديوهات متحركة.', icon: 'https://www.google.com/s2/favicons?domain=pika.art&sz=64' },
+            { cat: 'ai', title: 'v0.dev', url: 'https://v0.dev', desc: 'بناء واجهات ومواقع ويب بالكامل باستخدام AI.', icon: 'https://www.google.com/s2/favicons?domain=v0.dev&sz=64' },
+            { cat: 'ai', title: 'Sunno AI', url: 'https://suno.com', desc: 'توليد أغاني وموسيقى كاملة بالكلمات والألحان.', icon: 'https://www.google.com/s2/favicons?domain=suno.com&sz=64' },
+            { cat: 'ai', title: 'DeepL Translator', url: 'https://deepl.com', desc: 'أدق مترجم للغات بالذكاء الاصطناعي في العالم.', icon: 'https://www.google.com/s2/favicons?domain=deepl.com&sz=64' },
+            { cat: 'ai', title: 'Remove.bg', url: 'https://remove.bg', desc: 'إزالة خلفية أي صورة بضغطة زر وبدقة متناهية.', icon: 'https://www.google.com/s2/favicons?domain=remove.bg&sz=64' },
+
+            // 2. أدوات مكتبية (15)
+            { cat: 'office', title: 'iLovePDF', url: 'https://ilovepdf.com', desc: 'كل أدوات تعديل، ضغط، ودمج ملفات PDF مجاناً.', icon: 'https://www.google.com/s2/favicons?domain=ilovepdf.com&sz=64' },
+            { cat: 'office', title: 'Smallpdf', url: 'https://smallpdf.com', desc: 'تحويل ملفات الوورد والبي دي اف بسهولة وسرعة.', icon: 'https://www.google.com/s2/favicons?domain=smallpdf.com&sz=64' },
+            { cat: 'office', title: 'TinyPNG', url: 'https://tinypng.com', desc: 'ضغط حجم الصور بدون خسارة الجودة.', icon: 'https://www.google.com/s2/favicons?domain=tinypng.com&sz=64' },
+            { cat: 'office', title: 'Google Docs', url: 'https://docs.google.com', desc: 'محرر مستندات أونلاين مجاني من جوجل.', icon: 'https://www.google.com/s2/favicons?domain=google.com&sz=64' },
+            { cat: 'office', title: 'Notion', url: 'https://notion.so', desc: 'أفضل تطبيق لتنظيم المهام والملاحظات والمشاريع.', icon: 'https://www.google.com/s2/favicons?domain=notion.so&sz=64' },
+            { cat: 'office', title: 'PDF2Go', url: 'https://pdf2go.com', desc: 'تعديل وحماية ملفات PDF في المتصفح مباشرة.', icon: 'https://www.google.com/s2/favicons?domain=pdf2go.com&sz=64' },
+            { cat: 'office', title: 'Convertio', url: 'https://convertio.co', desc: 'تحويل الصيغ لجميع أنواع الملفات والصوتيات.', icon: 'https://www.google.com/s2/favicons?domain=convertio.co&sz=64' },
+            { cat: 'office', title: 'Google Sheets', url: 'https://sheets.google.com', desc: 'جداول بيانات أونلاين وتداول معلومات مالي.', icon: 'https://www.google.com/s2/favicons?domain=google.com&sz=64' },
+            { cat: 'office', title: 'Wetransfer', url: 'https://wetransfer.com', desc: 'إرسال ملفات كبيرة الحجم بسرعة وسهولة عبر الإيميل.', icon: 'https://www.google.com/s2/favicons?domain=wetransfer.com&sz=64' },
+            { cat: 'office', title: 'Grammarly', url: 'https://grammarly.com', desc: 'تدقيق وتصحيح الأخطاء الإملائية واللغوية.', icon: 'https://www.google.com/s2/favicons?domain=grammarly.com&sz=64' },
+            { cat: 'office', title: 'Archive.org', url: 'https://archive.org', desc: 'المكتبة الرقمية الشاملة للكتب والملفات التاريخية.', icon: 'https://www.google.com/s2/favicons?domain=archive.org&sz=64' },
+            { cat: 'office', title: '10MinuteMail', url: 'https://10minutemail.com', desc: 'إيميل مؤقت للتسجيل في المواقع ومنع السبام.', icon: 'https://www.google.com/s2/favicons?domain=10minutemail.com&sz=64' },
+            { cat: 'office', title: 'OCR.space', url: 'https://ocr.space', desc: 'استخراج النصوص المكتوبة من الصور والملفات.', icon: 'https://www.google.com/s2/favicons?domain=ocr.space&sz=64' },
+            { cat: 'office', title: 'DocuSign', url: 'https://docusign.com', desc: 'توقيع المستندات والعقود المكتوبة إلكترونياً.', icon: 'https://www.google.com/s2/favicons?domain=docusign.com&sz=64' },
+            { cat: 'office', title: 'Trello', url: 'https://trello.com', desc: 'إدارة مشاريع الفريق وتوزيع المهام بطريقة مرئية.', icon: 'https://www.google.com/s2/favicons?domain=trello.com&sz=64' },
+
+            // 3. كورسات وتعلم مجاني (15)
+            { cat: 'courses', title: 'Coursera', url: 'https://coursera.org', desc: 'كورسات من أشهر الجامعات العالمية مع شهادات.', icon: 'https://www.google.com/s2/favicons?domain=coursera.org&sz=64' },
+            { cat: 'courses', title: 'edX', url: 'https://edx.org', desc: 'دروس ودورات أكاديمية مفتوحة من Harvard و MIT.', icon: 'https://www.google.com/s2/favicons?domain=edx.org&sz=64' },
+            { cat: 'courses', title: 'Udemy', url: 'https://udemy.com', desc: 'آلاف الدورات التدريبية في مختلف المجالات.', icon: 'https://www.google.com/s2/favicons?domain=udemy.com&sz=64' },
+            { cat: 'courses', title: 'إدراك (Edraak)', url: 'https://edraak.org', desc: 'منصة مساقات تعليمية مجانية باللغة العربية.', icon: 'https://www.google.com/s2/favicons?domain=edraak.org&sz=64' },
+            { cat: 'courses', title: 'رواق (Rwaq)', url: 'https://rwaq.org', desc: 'منصة تعليمية عربية للمواد الأكاديمية والمهنية.', icon: 'https://www.google.com/s2/favicons?domain=rwaq.org&sz=64' },
+            { cat: 'courses', title: 'Khan Academy', url: 'https://khanacademy.org', desc: 'دروس مجانية في الرياضيات والعلوم والبرمجة للجميع.', icon: 'https://www.google.com/s2/favicons?domain=khanacademy.org&sz=64' },
+            { cat: 'courses', title: 'FreeCodeCamp', url: 'https://freecodecamp.org', desc: 'تعلم البرمجة وتطوير المواقع مجاناً مع التطبيق العملي.', icon: 'https://www.google.com/s2/favicons?domain=freecodecamp.org&sz=64' },
+            { cat: 'courses', title: 'Duolingo', url: 'https://duolingo.com', desc: 'أسهل وأفضل تطبيق لتعلم اللغات مجاناً بطريقة ممتعة.', icon: 'https://www.google.com/s2/favicons?domain=duolingo.com&sz=64' },
+            { cat: 'courses', title: 'Google Skillshop', url: 'https://skillshop.withgoogle.com', desc: 'شهادات مجانية من جوجل في التسويق والإعلانات.', icon: 'https://www.google.com/s2/favicons?domain=withgoogle.com&sz=64' },
+            { cat: 'courses', title: 'Harvard Online', url: 'https://pll.harvard.edu', desc: 'دورات تعليمية مجانية مقدمة من جامعة هارفارد.', icon: 'https://www.google.com/s2/favicons?domain=harvard.edu&sz=64' },
+            { cat: 'courses', title: 'Maharat Google', url: 'https://maharat.withgoogle.com', desc: 'مهارات من جوجل للنجاح الرقمي والتسويق.', icon: 'https://www.google.com/s2/favicons?domain=withgoogle.com&sz=64' },
+            { cat: 'courses', title: 'Codecademy', url: 'https://codecademy.com', desc: 'تعلم اللغات البرمجية خطوة بخطوة تفاعلياً.', icon: 'https://www.google.com/s2/favicons?domain=codecademy.com&sz=64' },
+            { cat: 'courses', title: 'Alison', url: 'https://alison.com', desc: 'دورات دبلوم ومهارات مهنية مع شهادات مجانية.', icon: 'https://www.google.com/s2/favicons?domain=alison.com&sz=64' },
+            { cat: 'courses', title: 'FutureLearn', url: 'https://futurelearn.com', desc: 'كورسات متنوعة وتطوير مهارات من بريطانيا.', icon: 'https://www.google.com/s2/favicons?domain=futurelearn.com&sz=64' },
+            { cat: 'courses', title: 'Sololearn', url: 'https://sololearn.com', desc: 'تعلم البرمجة من الهاتف والمبتدئين بسهولة.', icon: 'https://www.google.com/s2/favicons?domain=sololearn.com&sz=64' },
+
+            // 4. مونتاج وتعديل (15)
+            { cat: 'editing', title: 'CapCut Web', url: 'https://capcut.com', desc: 'أفضل برنامج مونتاج فيديو سهل وأونلاين للمحتوى.', icon: 'https://www.google.com/s2/favicons?domain=capcut.com&sz=64' },
+            { cat: 'editing', title: 'Photopea', url: 'https://photopea.com', desc: 'بديل فوتوشوب أونلاين مجاني يعمل داخل المتصفح.', icon: 'https://www.google.com/s2/favicons?domain=photopea.com&sz=64' },
+            { cat: 'editing', title: 'Canva Video', url: 'https://canva.com', desc: 'تصميم ومونتاج فيديوهات السوشيال ميديا بسرعة.', icon: 'https://www.google.com/s2/favicons?domain=canva.com&sz=64' },
+            { cat: 'editing', title: 'Clipchamp', url: 'https://clipchamp.com', desc: 'محرر فيديو احترافي من مايكروسوفت أونلاين.', icon: 'https://www.google.com/s2/favicons?domain=clipchamp.com&sz=64' },
+            { cat: 'editing', title: 'Pixlr', url: 'https://pixlr.com', desc: 'تعديل الصور وإضافة المؤثرات المباشرة بسرعة.', icon: 'https://www.google.com/s2/favicons?domain=pixlr.com&sz=64' },
+            { cat: 'editing', title: 'Pexels', url: 'https://pexels.com', desc: 'مكتبة فيديوهات وصور مجانية بدقة عالية بدون حقوق.', icon: 'https://www.google.com/s2/favicons?domain=pexels.com&sz=64' },
+            { cat: 'editing', title: 'Unsplash', url: 'https://unsplash.com', desc: 'أجمل الصور الاحترافية عالية الجودة مجاناً.', icon: 'https://www.google.com/s2/favicons?domain=unsplash.com&sz=64' },
+            { cat: 'editing', title: 'Freesound', url: 'https://freesound.org', desc: 'مؤثرات صوتية مجانية تماماً للمونتاج وصناع المحتوى.', icon: 'https://www.google.com/s2/favicons?domain=freesound.org&sz=64' },
+            { cat: 'editing', title: 'InVideo', url: 'https://invideo.io', desc: 'تحويل المقالات لنصوص وفيديوهات احترافية.', icon: 'https://www.google.com/s2/favicons?domain=invideo.io&sz=64' },
+            { cat: 'editing', title: 'Veed.io', url: 'https://veed.io', desc: 'إضافة ترجمة تلقائية ومؤثرات للفيديو أونلاين.', icon: 'https://www.google.com/s2/favicons?domain=veed.io&sz=64' },
+            { cat: 'editing', title: 'Flaticon', url: 'https://flaticon.com', desc: 'ملايين الأيقونات الموجهة والتصاميم بجميع الصيغ.', icon: 'https://www.google.com/s2/favicons?domain=flaticon.com&sz=64' },
+            { cat: 'editing', title: 'Mixkit', url: 'https://mixkit.co', desc: 'مقاطع فيديو، موسيقى، وقوالب مونتاج مجانية.', icon: 'https://www.google.com/s2/favicons?domain=mixkit.co&sz=64' },
+            { cat: 'editing', title: 'DaVinci Resolve', url: 'https://blackmagicdesign.com', desc: 'أقوى برنامج مونتاج وتعديل ألوان مجاني للكمبيوتر.', icon: 'https://www.google.com/s2/favicons?domain=blackmagicdesign.com&sz=64' },
+            { cat: 'editing', title: 'CleanPNG', url: 'https://cleanpng.com', desc: 'تحميل صور بدون خلفية PNG مجانية للتصميم.', icon: 'https://www.google.com/s2/favicons?domain=cleanpng.com&sz=64' },
+            { cat: 'editing', title: 'Audiotool', url: 'https://audiotool.com', desc: 'تعديل وإنتاج الصوت والموسيقى داخل المتصفح.', icon: 'https://www.google.com/s2/favicons?domain=audiotool.com&sz=64' },
+
+            // 5. الربح من الإنترنت (15)
+            { cat: 'earning', title: 'SproutGigs', url: 'https://sproutgigs.com', desc: 'إنجاز المهام المصغرة والربح السريع من النت.', icon: 'https://www.google.com/s2/favicons?domain=sproutgigs.com&sz=64' },
+            { cat: 'earning', title: 'Remotasks / Outlier', url: 'https://outlier.ai', desc: 'تدريب بيانات الذكاء الاصطناعي وجني أرباح ممتاز.', icon: 'https://www.google.com/s2/favicons?domain=outlier.ai&sz=64' },
+            { cat: 'earning', title: 'Upwork', url: 'https://upwork.com', desc: 'أكبر منصة عالمية للعمل الحر والمستقلين.', icon: 'https://www.google.com/s2/favicons?domain=upwork.com&sz=64' },
+            { cat: 'earning', title: 'Fiverr', url: 'https://fiverr.com', desc: 'بيع الخدمات المصغرة للعملاء حول العالم.', icon: 'https://www.google.com/s2/favicons?domain=fiverr.com&sz=64' },
+            { cat: 'earning', title: 'Mostaql (مستقل)', url: 'https://mostaql.com', desc: 'أكبر منصة عربية للعمل الحر وتنفيذ المشاريع.', icon: 'https://www.google.com/s2/favicons?domain=mostaql.com&sz=64' },
+            { cat: 'earning', title: 'Khamsat (خمسات)', url: 'https://khamsat.com', desc: 'سوق الخدمات المصغرة للعرب للربح ببدء من 5$.', icon: 'https://www.google.com/s2/favicons?domain=khamsat.com&sz=64' },
+            { cat: 'earning', title: 'Clickworker', url: 'https://clickworker.com', desc: 'أداء مهام الكتابة والتقييم للذكاء الاصطناعي.', icon: 'https://www.google.com/s2/favicons?domain=clickworker.com&sz=64' },
+            { cat: 'earning', title: 'Appen', url: 'https://appen.com', desc: 'الربح من تقييم محركات البحث وتدريب البيانات.', icon: 'https://www.google.com/s2/favicons?domain=appen.com&sz=64' },
+            { cat: 'earning', title: 'UserTesting', url: 'https://usertesting.com', desc: 'الربح من تجربة التطبيقات والمواقع وإبداء الرأي.', icon: 'https://www.google.com/s2/favicons?domain=usertesting.com&sz=64' },
+            { cat: 'earning', title: 'Shutterstock Contributor', url: 'https://submit.shutterstock.com', desc: 'بيع الصور والفيديوهات والتصاميم الخاصة بك.', icon: 'https://www.google.com/s2/favicons?domain=shutterstock.com&sz=64' },
+            { cat: 'earning', title: 'Amazon Associates', url: 'https://affiliate-program.amazon.com', desc: 'الربح من التسويق بالعمولة لمنتجات أمازون.', icon: 'https://www.google.com/s2/favicons?domain=amazon.com&sz=64' },
+            { cat: 'earning', title: 'Redbubble', url: 'https://redbubble.com', desc: 'الربح من طباعة تصاميمك على القمصان والأكواب.', icon: 'https://www.google.com/s2/favicons?domain=redbubble.com&sz=64' },
+            { cat: 'earning', title: 'Toluna', url: 'https://toluna.com', desc: 'الإجابة على الاستطلاعات وتجميع نقاط قابلة للسحب.', icon: 'https://www.google.com/s2/favicons?domain=toluna.com&sz=64' },
+            { cat: 'earning', title: 'Teespring', url: 'https://spring.com', desc: 'تصميم وبدء متجر ملابس بدون رأس مال.', icon: 'https://www.google.com/s2/favicons?domain=spring.com&sz=64' },
+            { cat: 'earning', title: 'Freelancer', url: 'https://freelancer.com', desc: 'التنافس على تنفيذ المشاريع والمهام البرمجية والفنية.', icon: 'https://www.google.com/s2/favicons?domain=freelancer.com&sz=64' },
+
+            // 6. وصفات أكل (15)
+            { cat: 'cooking', title: 'Cookpad (كوكباد)', url: 'https://cookpad.com', desc: 'أكبر مجتمع عربي لوصفات الأطباق والحلويات البيتية.', icon: 'https://www.google.com/s2/favicons?domain=cookpad.com&sz=64' },
+            { cat: 'cooking', title: 'SuperMama (سوبرماما)', url: 'https://supermama.me', desc: 'وصفات أكل صحية وسريعة مع ونصائح المطبخ.', icon: 'https://www.google.com/s2/favicons?domain=supermama.me&sz=64' },
+            { cat: 'cooking', title: 'Allrecipes', url: 'https://allrecipes.com', desc: 'ملايين الوصفات العالمية مع تقييمات الشيفات.', icon: 'https://www.google.com/s2/favicons?domain=allrecipes.com&sz=64' },
+            { cat: 'cooking', title: 'Tasty', url: 'https://tasty.co', desc: 'فيديوهات وصفات أكل سريعة ومبتكرة جداً.', icon: 'https://www.google.com/s2/favicons?domain=tasty.co&sz=64' },
+            { cat: 'cooking', title: 'BBC Good Food', url: 'https://bbcgoodfood.com', desc: 'أششهى الأطباق ووصفات الأكل الصحي الموثوقة.', icon: 'https://www.google.com/s2/favicons?domain=bbcgoodfood.com&sz=64' },
+            { cat: 'cooking', title: 'مطبخ سيدتي', url: 'https://kitchen.sayidaty.net', desc: 'وصفات طبخ شرقية وغربية بالفيديو والصور.', icon: 'https://www.google.com/s2/favicons?domain=sayidaty.net&sz=64' },
+            { cat: 'cooking', title: 'Serious Eats', url: 'https://seriouseats.com', desc: 'أسرار الطبخ العلمي وتقنيات المطبخ الاحترافي.', icon: 'https://www.google.com/s2/favicons?domain=seriouseats.com&sz=64' },
+            { cat: 'cooking', title: 'Food Network', url: 'https://foodnetwork.com', desc: 'وصفات كبار المشاهير في عالم الطبخ.', icon: 'https://www.google.com/s2/favicons?domain=foodnetwork.com&sz=64' },
+            { cat: 'cooking', title: 'Just A Pinch', url: 'https://justapinch.com', desc: 'وصفات منزلية ومشاركات طهاة حقيقيين.', icon: 'https://www.google.com/s2/favicons?domain=justapinch.com&sz=64' },
+            { cat: 'cooking', title: 'Epicurious', url: 'https://epicurious.com', desc: 'دليل الأكل الرفيع والمشروبات والحلويات.', icon: 'https://www.google.com/s2/favicons?domain=epicurious.com&sz=64' },
+            { cat: 'cooking', title: 'EatingWell', url: 'https://eatingwell.com', desc: 'وصفات للدايت والأكل الصحي والمغذيات.', icon: 'https://www.google.com/s2/favicons?domain=eatingwell.com&sz=64' },
+            { cat: 'cooking', title: 'Simply Recipes', url: 'https://simplyrecipes.com', desc: 'وصفات سهلة للمبتدئين وللعائلة بالخطوات.', icon: 'https://www.google.com/s2/favicons?domain=simplyrecipes.com&sz=64' },
+            { cat: 'cooking', title: 'Yummly', url: 'https://yummly.com', desc: 'توصيات أكلات بناءً على المكونات الموجودة في ثلاجتك.', icon: 'https://www.google.com/s2/favicons?domain=yummly.com&sz=64' },
+            { cat: 'cooking', title: 'Budget Bytes', url: 'https://budgetbytes.com', desc: 'وصفات أكل لذيذة واقتصادية وبميزانية قليلة.', icon: 'https://www.google.com/s2/favicons?domain=budgetbytes.com&sz=64' },
+            { cat: 'cooking', title: 'Food.com', url: 'https://food.com', desc: 'مكتبة حافلة بأكثر من نصف مليون وصفة مطبوخة.', icon: 'https://www.google.com/s2/favicons?domain=food.com&sz=64' },
+
+            // 7. رياضة ومباريات (15)
+            { cat: 'sports', title: 'Kooora (كورة)', url: 'https://kooora.com', desc: 'أكبر موقع رياضي عربي لمتابعة الأخبار والنتائج.', icon: 'https://www.google.com/s2/favicons?domain=kooora.com&sz=64' },
+            { cat: 'sports', title: 'Yalla Shoot', url: 'https://yalla-shoot.com', desc: 'جدول المباريات اليومية والنتائج المباشرة.', icon: 'https://www.google.com/s2/favicons?domain=yalla-shoot.com&sz=64' },
+            { cat: 'sports', title: 'Flashscore', url: 'https://flashscore.com', desc: 'متابعة نتائج المباريات لحظة بلحظة لكافة الرياضات.', icon: 'https://www.google.com/s2/favicons?domain=flashscore.com&sz=64' },
+            { cat: 'sports', title: 'SofaScore', url: 'https://sofascore.com', desc: 'إحصائيات وتقييم اللاعبين والتحليل الكروي.', icon: 'https://www.google.com/s2/favicons?domain=sofascore.com&sz=64' },
+            { cat: 'sports', title: 'Goal.com', url: 'https://goal.com', desc: 'أخبار كرة القدم العالمية والتغطيات المباشرة.', icon: 'https://www.google.com/s2/favicons?domain=goal.com&sz=64' },
+            { cat: 'sports', title: 'FilGoal', url: 'https://filgoal.com', desc: 'تغطيات ممتازة للأخبار الرياضية العربية والعالمية.', icon: 'https://www.google.com/s2/favicons?domain=filgoal.com&sz=64' },
+            { cat: 'sports', title: 'WhoScored', url: 'https://whoscored.com', desc: 'تحليلات تفصيلية وتكتيكية لجميع الدوريات الكبرى.', icon: 'https://www.google.com/s2/favicons?domain=whoscored.com&sz=64' },
+            { cat: 'sports', title: 'Transfermarkt', url: 'https://transfermarkt.com', desc: 'أسعار وقيمة الانتقالات وسوق أندية الكرة.', icon: 'https://www.google.com/s2/favicons?domain=transfermarkt.com&sz=64' },
+            { cat: 'sports', title: 'beIN SPORTS', url: 'https://beinsports.com', desc: 'الموقع الرسمي لشبكة القنوات الرياضية الشهيرة.', icon: 'https://www.google.com/s2/favicons?domain=beinsports.com&sz=64' },
+            { cat: 'sports', title: 'ESPN', url: 'https://espn.com', desc: 'شبكة الأخبار الرياضية العالمية لكافة الرياضات.', icon: 'https://www.google.com/s2/favicons?domain=espn.com&sz=64' },
+            { cat: 'sports', title: 'BBC Sport', url: 'https://bbc.com/sport', desc: 'تغطية صحفية رياضة محترفة وموثوقة.', icon: 'https://www.google.com/s2/favicons?domain=bbc.com&sz=64' },
+            { cat: 'sports', title: '365Scores', url: 'https://365scores.com', desc: 'تنبيهات سريعة للأهداف والنتائج المباشرة.', icon: 'https://www.google.com/s2/favicons?domain=365scores.com&sz=64' },
+            { cat: 'sports', title: 'Eurosport', url: 'https://eurosport.com', desc: 'متابعة الألعاب الأولمبية والرياضات المختلفة.', icon: 'https://www.google.com/s2/favicons?domain=eurosport.com&sz=64' },
+            { cat: 'sports', title: 'NBA.com', url: 'https://nba.com', desc: 'الموقع الرسمي لمتابعة دوري كرة السلة الأمريكي.', icon: 'https://www.google.com/s2/favicons?domain=nba.com&sz=64' },
+            { cat: 'sports', title: 'Formula 1', url: 'https://formula1.com', desc: 'متابعة سباقات الفورمولا 1 والنتائج فوراً.', icon: 'https://www.google.com/s2/favicons?domain=formula1.com&sz=64' },
+
+            // 8. خدمات الطلاب والدراسة (15)
+            { cat: 'student', title: 'WolframAlpha', url: 'https://wolframalpha.com', desc: 'حل المسائل الرياضية والفيزيائية المعقدة بالتفصيل.', icon: 'https://www.google.com/s2/favicons?domain=wolframalpha.com&sz=64' },
+            { cat: 'student', title: 'Google Scholar', url: 'https://scholar.google.com', desc: 'الباحث العلمي من جوجل المخصص للأبحاث والأوراق.', icon: 'https://www.google.com/s2/favicons?domain=google.com&sz=64' },
+            { cat: 'student', title: 'Quizlet', url: 'https://quizlet.com', desc: 'بطاقات تعليمية مخصصة للحفظ والتعلم الفعال.', icon: 'https://www.google.com/s2/favicons?domain=quizlet.com&sz=64' },
+            { cat: 'student', title: 'ResearchGate', url: 'https://researchgate.net', desc: 'تواصل مع أطباء وباحثين وتحميل أوراق علمية مجاناً.', icon: 'https://www.google.com/s2/favicons?domain=researchgate.net&sz=64' },
+            { cat: 'student', title: 'Symbolab', url: 'https://symbolab.com', desc: 'حاسبة تفاضل وتكامل ورياضيات تفصيلية بالخطوات.', icon: 'https://www.google.com/s2/favicons?domain=symbolab.com&sz=64' },
+            { cat: 'student', title: 'Sci-Hub', url: 'https://sci-hub.se', desc: 'تحميل المقالات والكتب الأكاديمية والمقيدة بمدفوعات.', icon: 'https://www.google.com/s2/favicons?domain=sci-hub.se&sz=64' },
+            { cat: 'student', title: 'Z-Library', url: 'https://singlelogin.re', desc: 'أكبر مكتبة لتحميل الكتب والمراجع مجاناً.', icon: 'https://www.google.com/s2/favicons?domain=z-lib.org&sz=64' },
+            { cat: 'student', title: 'Zotero', url: 'https://zotero.org', desc: 'تنظيم واقتباس المراجع العلمية وتوثيق الأبحاث.', icon: 'https://www.google.com/s2/favicons?domain=zotero.org&sz=64' },
+            { cat: 'student', title: 'CiteThisForMe', url: 'https://citethisforme.com', desc: 'توليد المراجع والمصادر التلقائي بأسلوب APA و MLA.', icon: 'https://www.google.com/s2/favicons?domain=citethisforme.com&sz=64' },
+            { cat: 'student', title: 'Scribbr', url: 'https://scribbr.com', desc: 'كشف الانتحال والسرقة الأدبية وتعديل الأبحاث.', icon: 'https://www.google.com/s2/favicons?domain=scribbr.com&sz=64' },
+            { cat: 'student', title: 'Chegg', url: 'https://chegg.com', desc: 'حلول الكتب المدرسية والتعلم المباشر للطلاب.', icon: 'https://www.google.com/s2/favicons?domain=chegg.com&sz=64' },
+            { cat: 'student', title: 'Desmos', url: 'https://desmos.com', desc: 'حاسبة بيانية تفاعلية ممتازة للرسم الهندسي والرياضيات.', icon: 'https://www.google.com/s2/favicons?domain=desmos.com&sz=64' },
+            { cat: 'student', title: 'PhET Simulations', url: 'https://phet.colorado.edu', desc: 'محاكاة تفاعلية لتجارب الفيزياء والكيمياء مجاناً.', icon: 'https://www.google.com/s2/favicons?domain=colorado.edu&sz=64' },
+            { cat: 'student', title: 'Grammarly for Education', url: 'https://grammarly.com', desc: 'تحسين كتابة المقالات الجامعية والواجبات.', icon: 'https://www.google.com/s2/favicons?domain=grammarly.com&sz=64' },
+            { cat: 'student', title: 'Notion for Education', url: 'https://notion.so', desc: 'تنظيم الجداول الدراسية والملاحظات للطلاب.', icon: 'https://www.google.com/s2/favicons?domain=notion.so&sz=64' },
+
+            // 9. مراجعة الأجهزة والتقنية (15)
+            { cat: 'tech', title: 'GSMArena', url: 'https://gsmarena.com', desc: 'أكبر مرجع عالمي لمواصفات ومراجعات الهواتف الذكية.', icon: 'https://www.google.com/s2/favicons?domain=gsmarena.com&sz=64' },
+            { cat: 'tech', title: 'DXOMARK', url: 'https://dxomark.com', desc: 'تقييم واختبار كاميرات الهواتف والشاشات والصوت.', icon: 'https://www.google.com/s2/favicons?domain=dxomark.com&sz=64' },
+            { cat: 'tech', title: 'Versus', url: 'https://versus.com', desc: 'مقارنة تقنية شاملة ومباشرة بين أي جهازين.', icon: 'https://www.google.com/s2/favicons?domain=versus.com&sz=64' },
+            { cat: 'tech', title: 'Geekbench', url: 'https://geekbench.com', desc: 'قياس واختبار سرعة معالجات الهواتف والكمبيوتر.', icon: 'https://www.google.com/s2/favicons?domain=geekbench.com&sz=64' },
+            { cat: 'tech', title: 'TechRadar', url: 'https://techradar.com', desc: 'مراجعات احترافية للأجهزة والتكنولوجيا الحديثة.', icon: 'https://www.google.com/s2/favicons?domain=techradar.com&sz=64' },
+            { cat: 'tech', title: 'The Verge', url: 'https://theverge.com', desc: 'أخبار التقنية والمراجعات اليومية الشاملة.', icon: 'https://www.google.com/s2/favicons?domain=theverge.com&sz=64' },
+            { cat: 'tech', title: 'Tom\'s Hardware', url: 'https://tomshardware.com', desc: 'دليل قطع الكمبيوتر والكرات وتجميع الحاسوب.', icon: 'https://www.google.com/s2/favicons?domain=tomshardware.com&sz=64' },
+            { cat: 'tech', title: 'NotebookCheck', url: 'https://notebookcheck.net', desc: 'اختبارات تفصيلية ومستفيضة للاب توب واللابتوبات.', icon: 'https://www.google.com/s2/favicons?domain=notebookcheck.net&sz=64' },
+            { cat: 'tech', title: 'Android Authority', url: 'https://androidauthority.com', desc: 'كل ما يتعلق بهواتف ونظام أندرويد والأجهزة.', icon: 'https://www.google.com/s2/favicons?domain=androidauthority.com&sz=64' },
+            { cat: 'tech', title: 'MacRumors', url: 'https://macrumors.com', desc: 'تسريبات ومراجعات منتجات شركة أبل وآيفون.', icon: 'https://www.google.com/s2/favicons?domain=macrumors.com&sz=64' },
+            { cat: 'tech', title: 'PCPartPicker', url: 'https://pcpartpicker.com', desc: 'تجميع وتأكد من توافق قطع البي سي والأسعار.', icon: 'https://www.google.com/s2/favicons?domain=pcpartpicker.com&sz=64' },
+            { cat: 'tech', title: 'Kimovil', url: 'https://kimovil.com', desc: 'البحث عن أسعار ومواصفات الهواتف وأفضل العروض.', icon: 'https://www.google.com/s2/favicons?domain=kimovil.com&sz=64' },
+            { cat: 'tech', title: 'PhoneArena', url: 'https://phonearena.com', desc: 'أخبار ومقارنات وتجارب الهواتف المحمولة.', icon: 'https://www.google.com/s2/favicons?domain=phonearena.com&sz=64' },
+            { cat: 'tech', title: 'RTINGS', url: 'https://rtings.com', desc: 'اختبار مراجعة الشاشات، التلفزيونات، والسماعات.', icon: 'https://www.google.com/s2/favicons?domain=rtings.com&sz=64' },
+            { cat: 'tech', title: 'iFixit', url: 'https://ifixit.com', desc: 'أدلة إصلاح ودليل تفكيك وصيانة الأجهزة الإلكترونية.', icon: 'https://www.google.com/s2/favicons?domain=ifixit.com&sz=64' },
+
+            // 10. دردشة وتواصل وترفيه (15)
+            { cat: 'social', title: 'Discord', url: 'https://discord.com', desc: 'مجتمعات دردشة وصوت للقيمرز والمطورين.', icon: 'https://www.google.com/s2/favicons?domain=discord.com&sz=64' },
+            { cat: 'social', title: 'Reddit', url: 'https://reddit.com', desc: 'مجتمعات ومنتديات عالمية لنقاش أي موضوع.', icon: 'https://www.google.com/s2/favicons?domain=reddit.com&sz=64' },
+            { cat: 'social', title: 'Telegram Web', url: 'https://web.telegram.org', desc: 'تطبيق المراسلة السريع والقنوات والمجموعات.', icon: 'https://www.google.com/s2/favicons?domain=telegram.org&sz=64' },
+            { cat: 'social', title: 'WhatsApp Web', url: 'https://web.whatsapp.com', desc: 'استخدام واتساب المباشر من متصفح الكمبيوتر.', icon: 'https://www.google.com/s2/favicons?domain=whatsapp.com&sz=64' },
+            { cat: 'social', title: 'Quora', url: 'https://quora.com', desc: 'منصة أسئلة وأجوبة وتبادل الخبرات والمعرفة.', icon: 'https://www.google.com/s2/favicons?domain=quora.com&sz=64' },
+            { cat: 'social', title: 'Pinterest', url: 'https://pinterest.com', desc: 'استكشاف الأفكار والإلهام والتصاميم البصرية.', icon: 'https://www.google.com/s2/favicons?domain=pinterest.com&sz=64' },
+            { cat: 'social', title: 'Twitch', url: 'https://twitch.tv', desc: 'أكبر منصة للبث المباشر للألعاب والألعاب الإلكترونية.', icon: 'https://www.google.com/s2/favicons?domain=twitch.tv&sz=64' },
+            { cat: 'social', title: 'X (Twitter)', url: 'https://x.com', desc: 'الأخبار العاجلة والتواصل والمناقشات السريعة.', icon: 'https://www.google.com/s2/favicons?domain=x.com&sz=64' },
+            { cat: 'social', title: 'LinkedIn', url: 'https://linkedin.com', desc: 'شبكة التواصل المهني والبحث عن وظائف وفرص.', icon: 'https://www.google.com/s2/favicons?domain=linkedin.com&sz=64' },
+            { cat: 'social', title: 'Poki Games', url: 'https://poki.com', desc: 'آلاف الألعاب المجانية الخفيفة أونلاين بدون تحميل.', icon: 'https://www.google.com/s2/favicons?domain=poki.com&sz=64' },
+            { cat: 'social', title: 'CrazyGames', url: 'https://crazygames.com', desc: 'العاب متصفح ممتعة وتحديات متعددة اللاعبين.', icon: 'https://www.google.com/s2/favicons?domain=crazygames.com&sz=64' },
+            { cat: 'social', title: 'Steam Web', url: 'https://store.steampowered.com', desc: 'المتجر الأشهر لألعاب الكمبيوتر والتواصل الاجتماعي.', icon: 'https://www.google.com/s2/favicons?domain=steampowered.com&sz=64' },
+            { cat: 'social', title: 'Slowly', url: 'https://slowly.app', desc: 'تطبيق للتعارف وتراسل الرسائل كأنه رسائل بريدية.', icon: 'https://www.google.com/s2/favicons?domain=slowly.app&sz=64' },
+            { cat: 'social', title: 'Medium', url: 'https://medium.com', desc: 'قراءة ومشاركة المقالات والقصص من كتاب عالميين.', icon: 'https://www.google.com/s2/favicons?domain=medium.com&sz=64' },
+            { cat: 'social', title: 'IMDb', url: 'https://imdb.com', desc: 'دليل وتقييم الأفلام والمسلسلات العالمي.', icon: 'https://www.google.com/s2/favicons?domain=imdb.com&sz=64' }
+        ];
+
+        // Multi-language Translations
+        const i18n = {
+            ar: {
+                heroTitle: "بوابتك الشاملة لكل المواقع والأدوات المفيدة على الويب",
+                heroSubtitle: "تصفح أكثر من 150 موقعاً مختاراً بعناية للذكاء الاصطناعي، العمل الحُر، الدراسة، والتسلية في مكان واحد.",
+                searchPlaceholder: "إبحث عن أي موقع أو أداة (مثال: ChatGPT, Canva, Coursera...)",
+                allCategory: "الكل",
+                visitBtn: "زيارة الموقع",
+                footerText: "جميع الحقوق محفوظة © 2026 - دليل المواقع والأدوات المفيدة Navigo.",
+                adTop: "مساحة إعلانية ممتازة للرعاة ورابط موقعك هنا! تواصل معنا للإعلان."
+            },
+            en: {
+                heroTitle: "Your Ultimate Gateway to Useful Websites & AI Tools",
+                heroSubtitle: "Browse over 150+ handpicked websites for AI, Freelancing, Learning, and Entertainment.",
+                searchPlaceholder: "Search any website or tool (e.g. ChatGPT, Canva, Coursera...)",
+                allCategory: "All",
+                visitBtn: "Visit Site",
+                footerText: "All Rights Reserved © 2026 - Navigo Web Directory.",
+                adTop: "Premium Sponsor Space Available! Contact us to place your website here."
+            },
+            fr: {
+                heroTitle: "Votre Portail Ultime vers les Meilleurs Sites et Outils Web",
+                heroSubtitle: "Explorez plus de 150+ sites sélectionnés pour l'IA, le Freelance, l'Étude et le Divertissement.",
+                searchPlaceholder: "Rechercher un site ou un outil (ex: ChatGPT, Canva, Coursera...)",
+                allCategory: "Tous",
+                visitBtn: "Visiter le site",
+                footerText: "Tous droits réservés © 2026 - Annuaire Web Navigo.",
+                adTop: "Espace publicitaire disponible! Contactez-nous pour ajouter votre lien."
+            }
+        };
+
+        let currentLang = 'ar';
+        let activeCategory = 'all';
+
+        // Initialize App
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCategoryButtons();
+            renderLinks();
+            detectUserLocationAndLanguage();
+        });
+
+        // Detect Location and Set Language Automatically
+        async function detectUserLocationAndLanguage() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (res.ok) {
+                    const data = await res.json();
+                    const countryCode = data.country_code; // e.g. DZ, FR, US
+                    
+                    if (['FR', 'BE', 'CA', 'MA', 'TN'].includes(countryCode)) {
+                        changeLanguage('fr');
+                    } else if (['US', 'GB', 'IN', 'DE'].includes(countryCode)) {
+                        changeLanguage('en');
+                    } else {
+                        changeLanguage('ar'); // Default to Arabic for DZ, SA, EG, etc.
+                    }
+                }
+            } catch (err) {
+                console.log("Geo IP error, staying with default language.");
+            }
+        }
+
+        // Render Category Buttons
+        function renderCategoryButtons() {
+            const container = document.getElementById('categoryButtons');
+            let html = `
+                <button onclick="filterCategory('all')" id="catBtn-all" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 whitespace-nowrap transition-all duration-200 bg-primary-600 text-white shadow-lg shadow-primary-500/20">
+                    <i class="fas fa-border-all"></i> <span class="cat-label-all">${i18n[currentLang].allCategory}</span>
+                </button>
+            `;
+
+            categories.forEach(cat => {
+                html += `
+                    <button onclick="filterCategory('${cat.id}')" id="catBtn-${cat.id}" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 light:text-slate-600 bg-slate-800 light:bg-slate-200 hover:bg-slate-700 light:hover:bg-slate-300 flex items-center gap-2 whitespace-nowrap transition-all duration-200">
+                        <i class="fas ${cat.icon}"></i> ${cat.name}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Render Links Grid
+        function renderLinks(searchTerm = '') {
+            const container = document.getElementById('linksContainer');
+            let filtered = linksData;
+
+            // Filter by category
+            if (activeCategory !== 'all') {
+                filtered = filtered.filter(item => item.cat === activeCategory);
+            }
+
+            // Filter by search query
+            if (searchTerm.trim() !== '') {
+                const term = searchTerm.toLowerCase();
+                filtered = filtered.filter(item => 
+                    item.title.toLowerCase().includes(term) || 
+                    item.desc.toLowerCase().includes(term)
+                );
+            }
+
+            // Update Header Count
+            document.getElementById('sitesCount').innerText = `${filtered.length} موقع`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-search-minus text-4xl text-slate-600 mb-3"></i>
+                        <p class="text-slate-400">لم نجد أي نتائج متطابقة مع بحثك.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(item => {
+                html += `
+                    <div class="glassmorphism p-4 rounded-2xl flex flex-col justify-between hover:border-primary-500/50 hover:shadow-xl hover:-translate-y-1 transition duration-200 group">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <img src="${item.icon}" onerror="this.src='https://via.placeholder.com/64?text=Navigo'" class="w-10 h-10 rounded-xl p-1 bg-slate-800 light:bg-slate-100 object-contain shadow-sm" alt="${item.title}">
+                                <div>
+                                    <h3 class="font-bold text-slate-100 light:text-slate-900 group-hover:text-primary-400 transition">${item.title}</h3>
+                                    <span class="text-[10px] text-primary-400 bg-primary-900/30 light:bg-primary-100 px-2 py-0.5 rounded-full font-medium">
+                                        ${getCategoryName(item.cat)}
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-400 light:text-slate-600 mb-4 line-clamp-2 leading-relaxed">
+                                ${item.desc}
+                            </p>
+                        </div>
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="w-full py-2 bg-slate-800 light:bg-slate-200 hover:bg-primary-600 light:hover:bg-primary-600 hover:text-white light:hover:text-white text-slate-300 light:text-slate-700 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-2 transition duration-200">
+                            <span>${i18n[currentLang].visitBtn}</span>
+                            <i class="fas fa-external-link-alt text-[10px]"></i>
+                        </a>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Get Category Name By ID
+        function getCategoryName(catId) {
+            const found = categories.find(c => c.id === catId);
+            return found ? found.name : catId;
+        }
+
+        // Filter Function
+        function filterCategory(catId) {
+            activeCategory = catId;
+            
+            // Highlight Buttons
+            document.querySelectorAll('#categoryButtons button').forEach(btn => {
+                btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 light:text-slate-600 bg-slate-800 light:bg-slate-200 flex items-center gap-2 whitespace-nowrap transition-all duration-200";
+            });
+
+            const activeBtn = document.getElementById(`catBtn-${catId}`);
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 whitespace-nowrap transition-all duration-200 bg-primary-600 text-white shadow-lg shadow-primary-500/20";
+            }
+
+            // Update Section Title
+            const titleEl = document.getElementById('currentCategoryTitle');
+            if (catId === 'all') {
+                titleEl.innerHTML = `<i class="fas fa-th-large"></i> كل التصنيفات`;
+            } else {
+                const catObj = categories.find(c => c.id === catId);
+                titleEl.innerHTML = `<i class="fas ${catObj.icon}"></i> ${catObj.name}`;
+            }
+
+            renderLinks(document.getElementById('searchInput').value);
+        }
+
+        // Search Input Handler
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            renderLinks(query);
+        }
+
+        // Change Language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('langSelector').value = lang;
+
+            const dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.dir = dir;
+            document.documentElement.lang = lang;
+
+            // Update UI Labels
+            document.getElementById('heroTitle').innerText = i18n[lang].heroTitle;
+            document.getElementById('heroSubtitle').innerText = i18n[lang].heroSubtitle;
+            document.getElementById('searchInput').placeholder = i18n[lang].searchPlaceholder;
+            document.getElementById('footerText').innerText = i18n[lang].footerText;
+            document.getElementById('adTextTop').innerText = i18n[lang].adTop;
+
+            const allLabel = document.querySelector('.cat-label-all');
+            if (allLabel) allLabel.innerText = i18n[lang].allCategory;
+
+            renderLinks(document.getElementById('searchInput').value);
+        }
+
+        // Toggle Dark/Light Theme
+        function toggleTheme() {
+            const body = document.getElementById('bodyApp');
+            const icon = document.getElementById('themeIcon');
+
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                icon.className = "fas fa-sun text-amber-500 text-lg";
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                icon.className = "fas fa-moon text-lg";
+            }
+        }
+    </script>
+</body>
+</html>
